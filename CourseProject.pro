@@ -3,10 +3,10 @@
 # Project created by QtCreator 2016-12-08T19:49:49
 #
 #-------------------------------------------------
-
 CONFIG  += QXT
-QXT     += core gui
-QT       += core gui
+QXT     += core gui network
+QT      += core gui
+QT      += network
 
 greaterThan(QT_MAJOR_VERSION, 4)
 {
@@ -18,20 +18,32 @@ TARGET = CourseProject
 TEMPLATE = app
 
 
-SOURCES += Source/main.cpp \
-    Source/frmMain.cpp
+SOURCES += \
+    main.cpp \
+    frmMain.cpp \
+    frmsend.cpp
 
 HEADERS  += \
-    Source/frmMain.h
+    frmMain.h \
+    frmsend.h
 
 FORMS    += \
-    Forms/frmSend.ui \
-    Forms/frmMain.ui
+    frmSend.ui \
+    frmMain.ui
 
-QXT_DIR = D:\programms\Qt\libqxt\lib
-win32:CONFIG(release, debug|release): LIBS += -LD:\programms\Qt\libqxt\lib -lQxtCore
-else:win32:CONFIG(debug, debug|release): LIBS += -LD:\programms\Qt\libqxt\bin -lQxtCore
+win32:CONFIG(release, debug|release):
+{
+    LIBS += -LC:/Qxt/lib -lQxtCore
+    LIBS += -LC:/Qxt/lib -lQxtNetwork
+}
+else:win32:CONFIG(debug, debug|release):
+{
+    LIBS += -LC:/Qxt/bin -lQxtCore
+    LIBS += -LC:/Qxt/bin -lQxtNetwork
+}
 
+INCLUDEPATH += C:/Qxt/include/QxtCore
+DEPENDPATH += C:/Qxt/include/QxtCore
 
-INCLUDEPATH += $D:\programms\Qt\libqxt\include\QxtCore
-DEPENDPATH += $D:\programms\Qt\libqxt\include\QxtCore
+INCLUDEPATH += C:/Qxt/include/QxtNetwork
+DEPENDPATH += C:/Qxt/include/QxtNetwork
